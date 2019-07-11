@@ -35,4 +35,11 @@ class StoreProductRequest extends FormRequest
             'required' => 'Поле :attribute не заполнено',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'url' => 'Путь'
+        ];
+    }
 }

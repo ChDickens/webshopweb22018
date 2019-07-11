@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(15);
         return view('product.index', compact('products'));
     }
 
@@ -57,11 +57,18 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
-        //
+        // SELECT * FROM products WHERE id = $id
+        $product =  Product::find($id);
+        return view('product.edit', compact('product'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -71,9 +78,11 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product =  Product::find($id);
+        // UPDATE * VALUES WHERE id = $id
+        $product->update($request->all());
+        return redirect()->route('products.index');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -82,6 +91,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // DELETE FROM products WHERE id = $id
+        Product::find($id)->delete();
+        return redirect()->route('products.index');
     }
 }

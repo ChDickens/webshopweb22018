@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
 use Illuminate\Http\Request;
 use App\Product;
 
@@ -14,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(15);
         return view('product.index', compact('products'));
     }
 
@@ -34,10 +35,11 @@ class ProductController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return void
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
         Product::create($request->all());
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')
+            ->with('success', 'Продукт успешно создан');
     }
 
     /**
@@ -57,13 +59,18 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
         // SELECT * FROM products WHERE id = $id
         $product =  Product::find($id);
         return view('product.edit', compact('product'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -78,7 +85,6 @@ class ProductController extends Controller
         $product->update($request->all());
         return redirect()->route('products.index');
     }
-
     /**
      * Remove the specified resource from storage.
      *

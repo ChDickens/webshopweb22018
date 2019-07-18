@@ -18,7 +18,7 @@
                 @csrf
                 <div class="form-group {{ $errors->first('name') ? 'has-error' : '' }}">
                     <label for="">Имя продукта</label>
-                    <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                    <input type="text" class="form-control" name="name" id="capital" value="{{ old('name') }}">
                     @if($errors->first('name'))
                         <span class="help-block">{{ $errors->first('name') }}</span>
                     @endif

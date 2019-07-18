@@ -20,3 +20,8 @@ Route::resource('/products', 'ProductController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/country', 'HomeController@getCountry')->name('get.country');
+Route::get('/checkout', 'HomeController@checkout')->name('checkout');
+Route::post('/getway', 'HomeController@getWay')->name('get.way');
+Route::get('/getway', 'HomeController@getWayGet')->name('get.way.get');

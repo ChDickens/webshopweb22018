@@ -400,8 +400,20 @@ desired effect
 <!-- AdminLTE App -->
 <script src="{{ asset('admin/dist/js/adminlte.min.js') }}"></script>
 <script>
-    $( document ).ready(function() {
-        $('.alert').alert();
+    // set endpoint and your access key
+    var ip = '134.201.250.155';
+    var access_key = '001c0649da112a89ad0c13de43f7a4e5';
+
+    // get the API result via jQuery.ajax
+    $.ajax({
+        url: 'http://api.ipstack.com/' + ip + '?access_key=' + access_key,
+        dataType: 'jsonp',
+        success: function(json) {
+
+            // output the "capital" object inside "location"
+            $('#capital').val(json.country_name);
+
+        }
     });
 </script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.

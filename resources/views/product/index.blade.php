@@ -3,6 +3,10 @@
 @section('content')
     <a href="{{ route('products.create') }}"
        class="btn btn-primary">Создать продукт</a>
+    <a href="{{ route('checkout') }}"
+       class="btn btn-success">Оформить заказ</a>
+    <a href="{{ route('get.way') }}"
+       class="btn btn-info">Получить расписание</a>
     @if(Session::has('success'))
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
